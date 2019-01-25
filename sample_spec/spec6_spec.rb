@@ -1,4 +1,4 @@
-describe "spec 6" do
+RSpec.describe "spec 6" do
   context "When enter context" do
     it "waits" do
       sleep(6)
