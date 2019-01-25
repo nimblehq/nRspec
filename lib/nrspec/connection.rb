@@ -2,8 +2,8 @@ require 'firebase'
 
 module Nrspec
   class Connection
-    BASE_URI = 'https://nrspec-d14ce.firebaseio.com/'
-    TABLE_NAME = 'rspec_files'
+    BASE_URI = 'https://nrspec-d14ce.firebaseio.com/'.freeze
+    TABLE_NAME = 'rspec_files'.freeze
 
     def initialize
       @firebase = Firebase::Client.new(BASE_URI)
@@ -14,20 +14,16 @@ module Nrspec
     end
 
     def create(resource:)
-      resource.merge!({
-        updated_at: current_timestamp,
-        created_at: current_timestamp
-      })
+      resource[:updated_at] = current_timestamp
+      resource[:created_at] = current_timestamp
 
       firebase.push(resource_path, resource)
     end
 
     def update(id:, resource:)
-      resource.merge!({
-        updated_at: current_timestamp
-      })
+      resource[:updated_at] = current_timestamp
 
-      firebase.update(resource_path(id: id), resource)
+      firebase.update(resource_path(id), resource)
     end
 
     private

@@ -1,24 +1,19 @@
 require 'nrspec/version'
 require 'nrspec/connection'
+require 'nrspec/measurer'
 require 'optparse'
 require 'pry'
 require 'firebase'
 
 module Nrspec
   def self.build
-    # p 'asd'
-    # p command = "rspec spec/nrspec_spec.rb"
-    # system(command)
-
-    # base_uri = 'https://nrspec-d14ce.firebaseio.com/'
-    # firebase = Firebase::Client.new(base_uri)
-    # firebase.push("todos", {
-    #   :name => 'Pick the milk',
-    #   :created => Firebase::ServerValue::TIMESTAMP
-    # })
-    # response = firebase.get("todos")
-    binding.pry
-
-
+    build_measurer
   end
+
+  def self.build_measurer
+    connection = Connection.new
+    Measurer.new(connection).build
+  end
+
+  private_class_method :build_measurer
 end
