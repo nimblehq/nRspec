@@ -14,6 +14,4 @@ module Nrspec
     connection = Connection.new
     Measurer.new(connection).build
   end
-
-  private_class_method :build_measurer
 end
